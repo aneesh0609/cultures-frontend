@@ -1,14 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { signupUser as signupAPI, loginUser as loginAPI } from "../api/auth.js"; // import from your api folder
+import axios from "axios";
+import { signupUser as signupAPI, loginUser as loginAPI } from "../api/auth.js";
+import { resetCart } from "./cartSlice";
 
-// ----- Async actions -----
 // Login user
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (credentials, thunkAPI) => {
     try {
-      const data = await loginAPI(credentials); // call API function
-      return data.user; // extract user info
+      const data = await loginAPI(credentials);
+      setTimeout(() => window.location.reload(), 300);
+      return data.user;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data?.message || "Login failed");
     }
@@ -20,7 +22,8 @@ export const signupUser = createAsyncThunk(
   "auth/signupUser",
   async (credentials, thunkAPI) => {
     try {
-      const data = await signupAPI(credentials); // call API function
+      const data = await signupAPI(credentials);
+      setTimeout(() => window.location.reload(), 300);
       return data.user;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data?.message || "Signup failed");
@@ -28,49 +31,40 @@ export const signupUser = createAsyncThunk(
   }
 );
 
-// ----- Slice -----
+// Logout user
+export const logoutUser = createAsyncThunk(
+  "auth/logoutUser",
+  async (_, thunkAPI) => {
+    try {
+      await axios.post(`${import.meta.env.VITE_API_URL}/auth/logout`, {}, { withCredentials: true });
+      
+      // ✅ Reset cart when logging out
+      thunkAPI.dispatch(resetCart());
+
+      setTimeout(() => window.location.reload(), 300);
+      return true;
+    } catch (error) {
+      return thunkAPI.rejectWithValue("Logout failed");
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: "auth",
-  initialState: {
-    user: null,      // logged-in user
-    loading: false,
-    error: null,
-  },
-  reducers: {
-    logout: (state) => {
-      state.user = null; // clear user on logout
-    },
-  },
+  initialState: { user: null, loading: false, error: null },
+  reducers: {},
   extraReducers: (builder) => {
-    // Login
-    builder.addCase(loginUser.pending, (state) => {
-      state.loading = true;
-      state.error = null;
-    });
-    builder.addCase(loginUser.fulfilled, (state, action) => {
-      state.loading = false;
-      state.user = action.payload;
-    });
-    builder.addCase(loginUser.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    });
+    builder
+      .addCase(loginUser.pending, (state) => { state.loading = true; state.error = null; })
+      .addCase(loginUser.fulfilled, (state, action) => { state.loading = false; state.user = action.payload; })
+      .addCase(loginUser.rejected, (state, action) => { state.loading = false; state.error = action.payload; })
 
-    // Signup
-    builder.addCase(signupUser.pending, (state) => {
-      state.loading = true;
-      state.error = null;
-    });
-    builder.addCase(signupUser.fulfilled, (state, action) => {
-      state.loading = false;
-      state.user = action.payload;
-    });
-    builder.addCase(signupUser.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    });
+      .addCase(signupUser.pending, (state) => { state.loading = true; state.error = null; })
+      .addCase(signupUser.fulfilled, (state, action) => { state.loading = false; state.user = action.payload; })
+      .addCase(signupUser.rejected, (state, action) => { state.loading = false; state.error = action.payload; })
+
+      .addCase(logoutUser.fulfilled, (state) => { state.user = null; });
   },
 });
 
-export const { logout } = authSlice.actions;
 export default authSlice.reducer;
