@@ -1,178 +1,139 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+// src/pages/Checkout.jsx
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createOrder } from "../slices/orderSlice";
+import { createPaymentOrder, verifyPayment } from "../slices/paymentSlice";
 import { useNavigate } from "react-router-dom";
 
-const CheckoutPage = () => {
+const Checkout = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [cartItems, setCartItems] = useState([]);
-  const [loading, setLoading] = useState(true);
 
-  // Shipping form state
-  const [fullName, setFullName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [addressLine1, setAddressLine1] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [postalCode, setPostalCode] = useState("");
+  const { loading, error } = useSelector((state) => state.order);
+  const paymentState = useSelector((state) => state.payment);
 
-  
-
-  // Order summary from backend
-  const [summary, setSummary] = useState({
-    subtotal: 0,
-    gstAmount: 0,
-    shippingCharges: 0,
-    totalAmount: 0,
+  const [shippingAddress, setShippingAddress] = useState({
+    fullName: "",
+    phone: "",
+    addressLine1: "",
+    city: "",
+    state: "",
+    postalCode: "",
   });
 
-  // Fetch cart items from backend to display
-  useEffect(() => {
-    const fetchCart = async () => {
-      try {
-        const res = await axios.get("/api/cart/get-cart"); // Replace with your cart endpoint
-        setCartItems(res.data.items || []);
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-        setLoading(false);
+  const handleChange = (e) => {
+    setShippingAddress({ ...shippingAddress, [e.target.name]: e.target.value });
+  };
+
+  const handlePlaceOrder = async (e) => {
+    e.preventDefault();
+
+    // 1️⃣ Create order in DB
+    const resultAction = await dispatch(createOrder({ shippingAddress }));
+    if (createOrder.fulfilled.match(resultAction)) {
+      const orderId = resultAction.payload.order._id;
+
+      // 2️⃣ Create Razorpay order
+      const paymentAction = await dispatch(createPaymentOrder({ orderId }));
+      if (createPaymentOrder.fulfilled.match(paymentAction)) {
+        const { razorpayOrder, key } = paymentAction.payload;
+
+        // 3️⃣ Open Razorpay Checkout
+        const options = {
+          key,
+          amount: razorpayOrder.amount,
+          currency: "INR",
+          name: "My E-Commerce",
+          description: "Order Payment",
+          order_id: razorpayOrder.id,
+          handler: async function (response) {
+            // 4️⃣ Verify payment after success
+            await dispatch(verifyPayment({ ...response, orderId }));
+            navigate("/order-summary");
+          },
+          prefill: {
+            name: shippingAddress.fullName,
+            contact: shippingAddress.phone,
+          },
+          theme: {
+            color: "#2563eb",
+          },
+        };
+
+        const razorpay = new window.Razorpay(options);
+        razorpay.open();
       }
-    };
-    fetchCart();
-  }, []);
-
-  const handlePlaceOrder = async () => {
-    if (!fullName || !phone || !addressLine1 || !city || !state || !postalCode) {
-      alert("Please fill all shipping details!");
-      return;
-    }
-
-    try {
-      const res = await axios.post("/api/orders/create-order", {
-        shippingAddress: {
-          fullName,
-          phone,
-          addressLine1,
-          city,
-          state,
-          postalCode,
-        },
-      });
-
-      if (res.data.success) {
-        // Optional: Update summary from backend
-        setSummary(res.data.summary);
-        // Redirect to order success page
-        navigate(`/order-success/${res.data.order._id}`);
-      }
-    } catch (error) {
-      console.error(error);
-      alert(error.response?.data?.message || "Failed to place order");
     }
   };
 
-  if (loading) return <p>Loading cart...</p>;
-  if (!cartItems.length) return <p>Your cart is empty.</p>;
-
   return (
-    <div className="max-w-5xl mx-auto p-4">
-      <h1 className="text-2xl font-semibold mb-4">Checkout</h1>
+    <div className="max-w-2xl mx-auto mt-24 bg-white shadow-md rounded-lg p-6">
+      <h2 className="text-2xl font-bold mb-4">Checkout</h2>
 
-      {/* Shipping Info */}
-      <div className="mb-6 border p-4 rounded-lg">
-        <h2 className="text-xl font-medium mb-3">Shipping Information</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <input
-            type="text"
-            placeholder="Full Name"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            className="border p-2 rounded"
-          />
-          <input
-            type="text"
-            placeholder="Phone"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            className="border p-2 rounded"
-          />
-          <input
-            type="text"
-            placeholder="Address Line 1"
-            value={addressLine1}
-            onChange={(e) => setAddressLine1(e.target.value)}
-            className="border p-2 rounded col-span-2"
-          />
-          <input
-            type="text"
-            placeholder="City"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            className="border p-2 rounded"
-          />
-          <input
-            type="text"
-            placeholder="State"
-            value={state}
-            onChange={(e) => setState(e.target.value)}
-            className="border p-2 rounded"
-          />
-          <input
-            type="text"
-            placeholder="Postal Code"
-            value={postalCode}
-            onChange={(e) => setPostalCode(e.target.value)}
-            className="border p-2 rounded"
-          />
-        </div>
-      </div>
+      <form onSubmit={handlePlaceOrder} className="space-y-4">
+        <input
+          name="fullName"
+          placeholder="Full Name"
+          className="w-full border p-2 rounded"
+          value={shippingAddress.fullName}
+          onChange={handleChange}
+          required
+        />
+        <input
+          name="phone"
+          placeholder="Phone Number"
+          className="w-full border p-2 rounded"
+          value={shippingAddress.phone}
+          onChange={handleChange}
+          required
+        />
+        <input
+          name="addressLine1"
+          placeholder="Address"
+          className="w-full border p-2 rounded"
+          value={shippingAddress.addressLine1}
+          onChange={handleChange}
+          required
+        />
+        <input
+          name="city"
+          placeholder="City"
+          className="w-full border p-2 rounded"
+          value={shippingAddress.city}
+          onChange={handleChange}
+          required
+        />
+        <input
+          name="state"
+          placeholder="State"
+          className="w-full border p-2 rounded"
+          value={shippingAddress.state}
+          onChange={handleChange}
+          required
+        />
+        <input
+          name="postalCode"
+          placeholder="Postal Code"
+          className="w-full border p-2 rounded"
+          value={shippingAddress.postalCode}
+          onChange={handleChange}
+          required
+        />
 
-      {/* Order Summary */}
-      <div className="mb-6 border p-4 rounded-lg">
-        <h2 className="text-xl font-medium mb-3">Order Summary</h2>
-        {cartItems.map((item) => (
-          <div key={item._id} className="flex justify-between mb-2">
-            <p>{item.productId.name} x {item.quantity}</p>
-            <p>₹{(item.productId.price * item.quantity).toFixed(2)}</p>
-          </div>
-        ))}
+        {/* Show any errors */}
+        {error && <p className="text-red-500">{error}</p>}
+        {paymentState.error && <p className="text-red-500">{paymentState.error}</p>}
 
-        <hr className="my-2" />
-        <div className="flex justify-between">
-          <p>Subtotal:</p>
-          <p>₹{summary.subtotal.toFixed(2)}</p>
-        </div>
-        <div className="flex justify-between">
-          <p>GST (5%):</p>
-          <p>₹{summary.gstAmount.toFixed(2)}</p>
-        </div>
-        <div className="flex justify-between">
-          <p>Shipping Charges:</p>
-          <p>₹{summary.shippingCharges.toFixed(2)}</p>
-        </div>
-        <hr className="my-2" />
-        <div className="flex justify-between font-semibold">
-          <p>Total:</p>
-          <p>₹{summary.totalAmount.toFixed(2)}</p>
-        </div>
-      </div>
-
-      {/* Actions */}
-      <div className="flex justify-between">
         <button
-          onClick={() => navigate("/products")}
-          className="px-6 py-2 bg-gray-200 rounded hover:bg-gray-300"
+          type="submit"
+          disabled={loading || paymentState.loading}
+          className="w-full bg-blue-600 text-white font-semibold py-3 px-6 rounded-xl hover:bg-blue-700 mt-4 transition-all"
         >
-          Continue Shopping
+          {loading || paymentState.loading ? "Processing..." : "Proceed to Payment"}
         </button>
-        <button
-          onClick={handlePlaceOrder}
-          className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-        >
-          Place Order
-        </button>
-      </div>
+      </form>
     </div>
   );
 };
 
-export default CheckoutPage;
+export default Checkout;

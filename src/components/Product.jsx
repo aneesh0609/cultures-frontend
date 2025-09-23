@@ -2,9 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../slices/productSlice";
 import { addToCart } from "../slices/cartSlice";
-import { Star, ShoppingBag, Heart, Eye, Loader2, AlertTriangle, Package, Check } from "lucide-react";
-
-
+import { Link } from "react-router-dom"; // Link for routing
+import {
+  Star,
+  ShoppingBag,
+  Heart,
+  Eye,
+  Loader2,
+  AlertTriangle,
+  Package,
+  Check,
+} from "lucide-react";
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -25,7 +33,6 @@ const Products = () => {
         })
       ).unwrap();
 
-      // Show feedback for added product
       setAddedToCart((prev) => ({ ...prev, [product._id]: true }));
       setTimeout(() => {
         setAddedToCart((prev) => ({ ...prev, [product._id]: false }));
@@ -36,14 +43,15 @@ const Products = () => {
   };
 
   return (
-
-      
     <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-start p-6">
-    
       {/* Header */}
-      <div className="text-center mb-8">
-        <h1 className="text-3xl sm:text-4xl font-bold text-white">Product Dashboard</h1>
-        <p className="text-gray-300 mt-2">View all available products in your store</p>
+      <div className="text-center mb-8 mt-20">
+        <h1 className="text-3xl sm:text-4xl font-bold text-white">
+          Product Dashboard
+        </h1>
+        <p className="text-gray-300 mt-2">
+          View all available products in your store
+        </p>
       </div>
 
       {/* Loading */}
@@ -111,38 +119,50 @@ const Products = () => {
                       <button className="p-2 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors">
                         <Heart className="w-4 h-4" />
                       </button>
-                      <button className="p-2 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors">
+                      {/* Eye icon wrapped with Link */}
+                      <Link
+                        to={`/product/${product._id}`}
+                        className="p-2 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 flex items-center justify-center transition-colors"
+                      >
                         <Eye className="w-4 h-4" />
-                      </button>
+                      </Link>
                     </div>
                   </div>
 
                   {/* Info */}
-                  <div className="p-4 sm:p-6">
-                    <h3 className="text-white font-semibold mb-2 truncate">{product.name}</h3>
-                    <div className="flex items-center mb-3">
+                  <div className="p-3 sm:p-4">
+                    <h3 className="text-white font-semibold mb-1 truncate text-sm">
+                      {product.name}
+                    </h3>
+                    <div className="flex items-center mb-2">
                       {[...Array(5)].map((_, i) => (
                         <Star
                           key={i}
-                          className={`w-3 h-3 ${i < Math.floor(product.rating?.average || 0) ? "text-yellow-400 fill-current" : "text-gray-500"}`}
+                          className={`w-3 h-3 ${
+                            i < Math.floor(product.rating?.average || 0)
+                              ? "text-yellow-400 fill-current"
+                              : "text-gray-500"
+                          }`}
                         />
                       ))}
-                      <span className="text-white/60 text-xs ml-2">
+                      <span className="text-white/60 text-xs ml-1">
                         ({product.rating?.average?.toFixed(1) || "0"})
                       </span>
                     </div>
                     <div className="flex items-center justify-between">
                       <div>
-                        <span className="text-white font-bold text-base">₹{product.price}</span>
+                        <span className="text-white font-bold text-sm">
+                          ₹{product.price}
+                        </span>
                         {product.discountPrice > 0 && (
-                          <span className="text-white/50 text-xs line-through ml-2">
+                          <span className="text-white/50 text-xs line-through ml-1">
                             ₹{product.discountPrice}
                           </span>
                         )}
                       </div>
                       <button
                         onClick={() => handleAddToCart(product)}
-                        className={`relative overflow-hidden px-3 py-2 rounded-lg text-white transition-all ${
+                        className={`relative overflow-hidden px-2 py-1 rounded-lg text-white transition-all text-xs ${
                           addedToCart[product._id]
                             ? "bg-green-500 hover:bg-green-600"
                             : "bg-gradient-to-r from-teal-500 to-cyan-500 hover:shadow-lg hover:shadow-teal-500/25"
@@ -150,10 +170,10 @@ const Products = () => {
                       >
                         {addedToCart[product._id] ? (
                           <div className="flex items-center gap-1">
-                            <Check className="w-4 h-4" /> Added
+                            <Check className="w-3 h-3" /> Added
                           </div>
                         ) : (
-                          <ShoppingBag className="w-4 h-4" />
+                          <ShoppingBag className="w-3 h-3" />
                         )}
                       </button>
                     </div>
@@ -169,6 +189,9 @@ const Products = () => {
 };
 
 export default Products;
+
+
+
 
 
 

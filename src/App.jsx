@@ -9,6 +9,8 @@ import Cart from "./pages/Cart";
 import Orders from "./pages/Orders";
 import ProtectedRoute from "./routes/ProtectedRoutes";
 import CheckoutPage from "./pages/Checkout";
+import OrderSummary from "./pages/orderSummary";
+import SingleProduct from "./pages/SingleProduct";
 
 function App() {
   return (
@@ -18,18 +20,13 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/products" element={<Products />} />
+            <Route path="/product/:id" element={<SingleProduct />} />
         
          <Route  path="/cart"  element={ <ProtectedRoute > <Cart />   </ProtectedRoute>   } />
          <Route  path="/checkout"  element={ <ProtectedRoute > <CheckoutPage />   </ProtectedRoute>   } />
-       
-          <Route
-            path="/orders"
-            element={
-              
-                <Orders />
-              
-            }
-          />
+          <Route  path="/order-summary"  element={ <ProtectedRoute > <OrderSummary />   </ProtectedRoute>   } />
+          
+          <Route path="/orders"element={<Orders /> }/>
         </Routes>
       </Router>
     

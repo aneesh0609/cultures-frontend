@@ -15,22 +15,15 @@ import {
   Package,
   ArrowLeft,
   CreditCard,
-  Truck,
-  Shield,
-  Gift,
   ChevronDown,
   ChevronUp,
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
-
 const CartPage = () => {
   const dispatch = useDispatch();
   const { items, loading, error } = useSelector((state) => state.cart);
   const [isOrderSummaryExpanded, setIsOrderSummaryExpanded] = useState(false);
- 
-
-
 
   useEffect(() => {
     dispatch(fetchCart());
@@ -49,19 +42,19 @@ const CartPage = () => {
     dispatch(clearCart());
   };
 
+  // 🟢 CALCULATIONS
   const subtotal = items.reduce(
     (acc, item) => acc + item.productId.price * item.quantity,
     0
   );
 
-  const deliveryCharges = subtotal > 100 ? 0 : 9.99; // Example: free delivery over 100
-  const tax = subtotal * 0.08; // 8% tax
+  const deliveryCharges = subtotal > 999 ? 0 : 50; // ✅ Free shipping above 999
+  const tax = subtotal * 0.05; // ✅ 5% GST
   const total = subtotal + deliveryCharges + tax;
 
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Header */}
-      
       <div className="bg-white/80 backdrop-blur-md border-b border-gray-200/50 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-14 sm:h-16">
@@ -229,13 +222,12 @@ const CartPage = () => {
 };
 
 const OrderSummary = ({ subtotal, deliveryCharges, tax, total, isMobile = false }) => {
-
-   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleCheckout = () => {
-    navigate("/checkout"); // Redirects to your Checkout page
+    navigate("/checkout");
   };
-  
+
   return (
     <div
       className={`bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden ${
@@ -243,7 +235,9 @@ const OrderSummary = ({ subtotal, deliveryCharges, tax, total, isMobile = false 
       }`}
     >
       <div className="p-4 sm:p-6 border-b border-gray-200">
-        <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Order Summary</h2>
+        <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
+          Order Summary
+        </h2>
       </div>
 
       <div className="p-4 sm:p-6 space-y-4">
@@ -262,7 +256,7 @@ const OrderSummary = ({ subtotal, deliveryCharges, tax, total, isMobile = false 
         </div>
 
         <div className="flex justify-between text-gray-600">
-          <span>Tax (8%)</span>
+          <span>GST (5%)</span>
           <span>₹{tax.toFixed(2)}</span>
         </div>
 
@@ -271,10 +265,10 @@ const OrderSummary = ({ subtotal, deliveryCharges, tax, total, isMobile = false 
           <span>₹{total.toFixed(2)}</span>
         </div>
 
-        <button className="w-full bg-blue-600 text-white font-semibold py-3 px-6 rounded-xl hover:bg-blue-700 mt-4 transition-all"   
-           onClick={handleCheckout}
+        <button
+          className="w-full bg-blue-600 text-white font-semibold py-3 px-6 rounded-xl hover:bg-blue-700 mt-4 transition-all"
+          onClick={handleCheckout}
         >
-             
           <CreditCard className="w-5 h-5 inline mr-2" /> Proceed to Checkout
         </button>
       </div>

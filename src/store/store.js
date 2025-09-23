@@ -15,11 +15,15 @@ import storage from "redux-persist/lib/storage";
 import authReducer from "../slices/authSlice";
 import cartReducer from "../slices/cartSlice";
 import productReducer from "../slices/productSlice"
+import orderReducer from "../slices/orderSlice";
+import paymentReducer from "../slices/paymentSlice";
 
 const rootReducer = combineReducers({
   auth: authReducer,
   cart: cartReducer,
   products: productReducer, // add this
+  order: orderReducer, 
+  payment: paymentReducer ,
 });
 
 const persistConfig = {
