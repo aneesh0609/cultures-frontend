@@ -17,9 +17,12 @@ import cartReducer from "../slices/cartSlice";
 import productReducer from "../slices/productSlice"
 import orderReducer from "../slices/orderSlice";
 import paymentReducer from "../slices/paymentSlice";
+import userReducer from '../slices/userSlice'
+
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  user: userReducer ,
   cart: cartReducer,
   products: productReducer, // add this
   order: orderReducer, 

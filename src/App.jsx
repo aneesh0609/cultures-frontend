@@ -11,6 +11,7 @@ import ProtectedRoute from "./routes/ProtectedRoutes";
 import CheckoutPage from "./pages/Checkout";
 import OrderSummary from "./pages/orderSummary";
 import SingleProduct from "./pages/SingleProduct";
+import UserDashboard from "./pages/Dashboard";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
          <Route  path="/cart"  element={ <ProtectedRoute > <Cart />   </ProtectedRoute>   } />
          <Route  path="/checkout"  element={ <ProtectedRoute > <CheckoutPage />   </ProtectedRoute>   } />
           <Route  path="/order-summary"  element={ <ProtectedRoute > <OrderSummary />   </ProtectedRoute>   } />
+          <Route  path="/dashboard"  element={ <ProtectedRoute > <UserDashboard />   </ProtectedRoute>   } />
           
           <Route path="/orders"element={<Orders /> }/>
         </Routes>

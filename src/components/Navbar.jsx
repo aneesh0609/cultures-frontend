@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../slices/authSlice";
 import { useNavigate, Link } from "react-router-dom";
 import Modal from "./Modal";
-import { ShoppingCart, FileText, User } from "lucide-react";
+import { ShoppingCart, FileText, User, LayoutDashboard } from "lucide-react";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -32,6 +32,11 @@ const Navbar = () => {
     else navigate("/orders");
   };
 
+  const handleDashboardClick = () => {
+    if (!user) setShowLoginModal(true);
+    else navigate("/dashboard");
+  };
+
   return (
     <div>
       <nav className="fixed top-0 w-full z-50 backdrop-blur-lg bg-black/50 border-b border-white/10">
@@ -54,7 +59,7 @@ const Navbar = () => {
 
           {/* Right side icons */}
           <div className="flex items-center space-x-4">
-            {/* Cart icon (desktop + mobile) */}
+            {/* Cart icon */}
             <button
               onClick={handleCartClick}
               className="p-2 text-white/80 hover:text-white transition-colors relative"
@@ -79,7 +84,16 @@ const Navbar = () => {
               {dropdownOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg overflow-hidden z-50">
                   <div className="flex flex-col divide-y divide-gray-200">
-                    {/* Desktop: Orders + Login/Logout */}
+                    {/* Dashboard button */}
+                    <button
+                      onClick={handleDashboardClick}
+                      className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 text-gray-900"
+                    >
+                      <LayoutDashboard className="w-4 h-4" />
+                      Dashboard
+                    </button>
+
+                    {/* Orders */}
                     <button
                       onClick={handleOrdersClick}
                       className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 text-gray-900"
@@ -109,34 +123,10 @@ const Navbar = () => {
 
                     {/* Mobile only links */}
                     <div className="md:hidden flex flex-col">
-                      <Link
-                        to="/"
-                        onClick={() => setDropdownOpen(false)}
-                        className="px-4 py-2 hover:bg-gray-100 text-gray-900"
-                      >
-                        Home
-                      </Link>
-                      <Link
-                        to="/products"
-                        onClick={() => setDropdownOpen(false)}
-                        className="px-4 py-2 hover:bg-gray-100 text-gray-900"
-                      >
-                        Products
-                      </Link>
-                      <Link
-                        to="/about"
-                        onClick={() => setDropdownOpen(false)}
-                        className="px-4 py-2 hover:bg-gray-100 text-gray-900"
-                      >
-                        About
-                      </Link>
-                      <Link
-                        to="/contact"
-                        onClick={() => setDropdownOpen(false)}
-                        className="px-4 py-2 hover:bg-gray-100 text-gray-900"
-                      >
-                        Contact
-                      </Link>
+                      <Link to="/" onClick={() => setDropdownOpen(false)} className="px-4 py-2 hover:bg-gray-100 text-gray-900">Home</Link>
+                      <Link to="/products" onClick={() => setDropdownOpen(false)} className="px-4 py-2 hover:bg-gray-100 text-gray-900">Products</Link>
+                      <Link to="/about" onClick={() => setDropdownOpen(false)} className="px-4 py-2 hover:bg-gray-100 text-gray-900">About</Link>
+                      <Link to="/contact" onClick={() => setDropdownOpen(false)} className="px-4 py-2 hover:bg-gray-100 text-gray-900">Contact</Link>
                     </div>
                   </div>
                 </div>
