@@ -9,7 +9,7 @@ export const fetchUserInfo = createAsyncThunk(
   "user/fetchUserInfo",
   async (_, thunkAPI) => {
     try {
-      const res = await axios.get("/user/getusers", { withCredentials: true });
+      const res = await axios.get("/user/me", { withCredentials: true });
       return res.data.user; // expected response: { user: { ... } }
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data?.message || "Failed to fetch user info");
