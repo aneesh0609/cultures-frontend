@@ -9,7 +9,6 @@ import {
   CreditCard,
   ShoppingBag,
   XCircle,
-  CheckCircle,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
 
@@ -20,21 +19,6 @@ const Orders = () => {
   useEffect(() => {
     dispatch(fetchOrders());
   }, [dispatch]);
-
-  const getStatusColor = (status) => {
-    switch (status?.toLowerCase()) {
-      case "delivered":
-        return "bg-green-100 text-green-800 border-green-200";
-      case "pending":
-        return "bg-yellow-100 text-yellow-800 border-yellow-200";
-      case "processing":
-        return "bg-blue-100 text-blue-800 border-blue-200";
-      case "cancelled":
-        return "bg-red-100 text-red-800 border-red-200";
-      default:
-        return "bg-gray-100 text-gray-800 border-gray-200";
-    }
-  };
 
   const handleCancelOrder = (id) => {
     dispatch(cancelOrder(id));
@@ -77,18 +61,23 @@ const Orders = () => {
 
   if (!orders?.length) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center space-y-6 max-w-md mx-auto px-4">
-          <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto">
-            <Package className="w-10 h-10 text-gray-400" />
+      <div className="min-h-screen bg-gray-50">
+        <Navbar />
+        <div className="pt-20 flex items-center justify-center">
+          <div className="text-center space-y-6 max-w-md mx-auto px-4">
+            <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto">
+              <Package className="w-10 h-10 text-gray-400" />
+            </div>
+            <div>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-2">No orders yet</h2>
+              <p className="text-gray-600">
+                When you place your first order, it will appear here.
+              </p>
+            </div>
+            <button className="bg-gray-900 text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors">
+              Start Shopping
+            </button>
           </div>
-          <div>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-2">No orders yet</h2>
-            <p className="text-gray-600">When you place your first order, it will appear here.</p>
-          </div>
-          <button className="bg-gray-900 text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors">
-            Start Shopping
-          </button>
         </div>
       </div>
     );
@@ -96,9 +85,10 @@ const Orders = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-       <Navbar /> 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-         
+      <Navbar />
+
+      {/* Added top padding to ensure content starts after navbar */}
+      <div className="pt-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
@@ -131,7 +121,9 @@ const Orders = () => {
                   <div className="flex items-center gap-4">
                     <div className="text-right">
                       <p className="text-sm text-gray-600">Total Amount</p>
-                      <p className="text-lg font-semibold text-gray-900">₹{order.totalAmount || calculateTotal(order.items)}</p>
+                      <p className="text-lg font-semibold text-gray-900">
+                        ₹{order.totalAmount || calculateTotal(order.items)}
+                      </p>
                     </div>
                     <span
                       className={`px-3 py-1 rounded-full text-sm font-medium border ${
@@ -173,11 +165,15 @@ const Orders = () => {
                           <h3 className="font-medium text-gray-900 truncate">
                             {p.productId?.name || "Unknown Product"}
                           </h3>
-                          <p className="text-sm text-gray-600 mt-1">Quantity: {p.quantity}</p>
+                          <p className="text-sm text-gray-600 mt-1">
+                            Quantity: {p.quantity}
+                          </p>
                         </div>
 
                         <div className="text-right flex-shrink-0">
-                          <p className="font-semibold text-gray-900">₹{p.productId?.price}</p>
+                          <p className="font-semibold text-gray-900">
+                            ₹{p.productId?.price}
+                          </p>
                           <p className="text-sm text-gray-600">per item</p>
                         </div>
                       </div>
@@ -197,14 +193,15 @@ const Orders = () => {
                   <CreditCard className="w-4 h-4" />
                   <span>Payment method: Card</span>
                 </div>
-                {order.status?.toLowerCase() !== "cancelled" && order.status?.toLowerCase() !== "delivered" && (
-                  <button
-                    onClick={() => handleCancelOrder(order._id)}
-                    className="flex items-center gap-1 text-red-600 hover:text-red-800 font-medium text-sm"
-                  >
-                    <XCircle className="w-4 h-4" /> Cancel Order
-                  </button>
-                )}
+                {order.status?.toLowerCase() !== "cancelled" &&
+                  order.status?.toLowerCase() !== "delivered" && (
+                    <button
+                      onClick={() => handleCancelOrder(order._id)}
+                      className="flex items-center gap-1 text-red-600 hover:text-red-800 font-medium text-sm"
+                    >
+                      <XCircle className="w-4 h-4" /> Cancel Order
+                    </button>
+                  )}
               </div>
             </div>
           ))}
