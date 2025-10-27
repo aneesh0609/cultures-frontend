@@ -13,6 +13,7 @@ export const fetchUserInfo = createAsyncThunk(
       return res.data.user; // expected response: { user: { ... } }
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data?.message || "Failed to fetch user info");
+     
     }
   }
 );

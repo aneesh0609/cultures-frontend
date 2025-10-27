@@ -11,6 +11,7 @@ import {
   XCircle,
   CheckCircle,
 } from "lucide-react";
+import Navbar from "../components/Navbar";
 
 const Orders = () => {
   const dispatch = useDispatch();
@@ -95,7 +96,9 @@ const Orders = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+       <Navbar /> 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+         
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
