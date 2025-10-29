@@ -46,10 +46,10 @@ const Products = () => {
     <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-start p-6">
       {/* Header */}
       <div className="text-center mb-8 mt-20">
-        <h1 className="text-3xl sm:text-4xl font-bold text-white">
-          Product Dashboard
+        <h1 className="text-3xl sm:text-5xl font-bold panchang tracking-[0.1em] text-white mt-2">
+          PRODUCT
         </h1>
-        <p className="text-gray-300 mt-2">
+        <p className="text-gray-300 font-light mt-4 mb-8 trench ">
           View all available products in your store
         </p>
       </div>
@@ -76,7 +76,7 @@ const Products = () => {
           {items.length === 0 ? (
             <div className="flex flex-col items-center text-gray-400 mt-10">
               <Package className="w-12 h-12 mb-2" />
-              <p className="text-lg">No products available.</p>
+              <p className="text-lg normal">No products available.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-7xl">
@@ -131,7 +131,7 @@ const Products = () => {
 
                   {/* Info */}
                   <div className="p-3 sm:p-4">
-                    <h3 className="text-white font-semibold mb-1 truncate text-sm">
+                    <h3 className="text-white font-medium mb-1 truncate text-sm normal tracking-[0.05em]">
                       {product.name}
                     </h3>
                     <div className="flex items-center mb-2">

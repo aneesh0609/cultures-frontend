@@ -95,9 +95,9 @@ const Orders = () => {
             <div className="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center">
               <ShoppingBag className="w-5 h-5 text-white" />
             </div>
-            <h1 className="text-2xl font-bold text-gray-900">My Orders</h1>
+            <h1 className="text-2xl font-bold text-gray-900 trench tracking-[0.05em]">My Orders</h1>
           </div>
-          <p className="text-gray-600">Track and manage your order history</p>
+          <p className="text-gray-600 normal tracking-[0.06em]">Track and manage your order history</p>
         </div>
 
         {/* Orders List */}

@@ -28,21 +28,17 @@ export default function CulturesHomepage() {
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-8">
         <div className="text-center mb-8">
           <h1
-            className="text-5xl md:text-6xl lg:text-[8rem] font-light text-gray-700 mb-3 leading-none tracking-tight"
-            style={{ fontFamily: "Georgia, serif" }}
+            className="text-8xl md:text-9xl  fonts lg:text-[12rem] font-light text-gray-700 lg:mb-3 leading-none tracking-tight"
+            
           >
             culture's
           </h1>
 
-          {/* Tagline */}
-          <div className="text-orange-400 font-light text-xs sm:text-sm md:text-base tracking-[0.3em] uppercase">
-            <div>WHERE FASHION FINDS ITS</div>
-            <div className="mt-1">ROOTS.</div>
-          </div>
+    
         </div>
 
         {/* Shop button */}
-        <button className="bg-gray-800 hover:bg-gray-700 text-orange-300 px-6 sm:px-8 py-2 rounded-full text-xs sm:text-sm font-normal tracking-[0.25em] uppercase transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+        <button className="bg-gray-800 hover:bg-gray-700 text-orange-300 px-6 sm:px-8 py-2 rounded-full text-xs sm:text-sm font-normal tracking-[0.15em] uppercase transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 normal">
           SHOP
         </button>
       </div>

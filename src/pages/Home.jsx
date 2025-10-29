@@ -17,7 +17,7 @@ export default function Home() {
       {/* Features */}
       <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 normal tracking-[0.08em]">
             {[
               { icon: Zap, title: "Lightning Fast", desc: "Quick delivery worldwide" },
               { icon: Shield, title: "Secure Payment", desc: "100% protected checkout" },

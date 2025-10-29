@@ -94,7 +94,7 @@ const SingleProduct = () => {
                 <div className="inline-block px-3 py-1 bg-gray-800 text-white text-xs rounded-full capitalize">
                   {product.category}
                 </div>
-                <h1 className="text-2xl font-bold text-gray-900 leading-tight">
+                <h1 className="text-2xl font-semibold text-gray-900 leading-tight normal">
                   {product.name}
                 </h1>
               </div>
@@ -165,7 +165,7 @@ const SingleProduct = () => {
                 <div className="flex gap-3">
                   <button
                     onClick={handleAddToCart}
-                    className={`flex-1 py-3 px-6 rounded-lg font-medium text-sm transition-all transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2 ${
+                    className={`flex-1 py-3 px-6 rounded-lg font-medium text-sm transition-all transform hover:scale-105 active:scale-95 flex items-center normal justify-center gap-2 ${
                       addedToCart
                         ? "bg-green-600 text-white shadow-md shadow-green-600/25"
                         : "bg-gray-900 text-white hover:bg-gray-800 shadow-md shadow-gray-900/25"
@@ -192,8 +192,8 @@ const SingleProduct = () => {
 
               {/* Description */}
               <div className="space-y-3 pt-6 border-t border-gray-200">
-                <h2 className="text-lg font-semibold text-gray-900">Product Details</h2>
-                <p className="text-gray-700 text-sm leading-relaxed">
+                <h2 className="text-lg font-semibold text-gray-900 normal">Product Details</h2>
+                <p className="text-gray-700 text-sm leading-relaxed normal">
                   {product.description || "No description available for this product."}
                 </p>
               </div>
@@ -204,8 +204,8 @@ const SingleProduct = () => {
           {items.length > 1 && (
             <div className="space-y-6">
               <div className="text-center space-y-1">
-                <h2 className="text-xl font-semibold text-gray-900">You might also like</h2>
-                <p className="text-gray-600 text-sm">Discover similar products from the same category</p>
+                <h2 className="text-2xl font-semibold text-gray-800 panchang mt-2 mb-2  tracking-[0.1em]">You might also like</h2>
+                <p className="text-gray-600 text-sm normal  ">Discover similar products from the same category</p>
               </div>
               <RelatedProducts
                 products={items
