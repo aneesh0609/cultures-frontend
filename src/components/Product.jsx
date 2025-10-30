@@ -50,7 +50,7 @@ const Products = () => {
           PRODUCTS
         </h1>
         <p className="text-gray-300 font-light mt-3 mb-4">
-          View all available products in your store
+          Explore the latest collection
         </p>
       </div>
 

@@ -7,6 +7,7 @@ import Footer from '../components/Footer';
 import CompactDeliveryMap from '../components/CompactDeliveryMap';
 import ProductCard from '../components/CompactDeliveryMap';
 import ImageCarousel from '../components/ImageCarousel';
+import FAQSection from '../components/Faq';
 
 export default function Home() {
  
@@ -69,6 +70,7 @@ export default function Home() {
     
 
       <Product />
+      <FAQSection />
       <Footer />
     </div>
 

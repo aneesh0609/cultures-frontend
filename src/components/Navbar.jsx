@@ -42,7 +42,7 @@ const Navbar = () => {
       <nav className="fixed top-0 w-full z-50 backdrop-blur-lg bg-black/50 border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           {/* Logo */}
-          <div className="text-xl sm:text-2xl font-bold text-white">
+          <div className="text-xl sm:text-2xl font-bold text-white panchang">
             <span className="bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent">
               Cul
             </span>
@@ -53,7 +53,6 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-6 text-white/80">
             <Link to="/" className="hover:text-white transition-colors">Home</Link>
             <Link to="/products" className="hover:text-white transition-colors">Products</Link>
-            <Link to="/about" className="hover:text-white transition-colors">About</Link>
             <Link to="/contact" className="hover:text-white transition-colors">Contact</Link>
           </div>
 
@@ -90,7 +89,7 @@ const Navbar = () => {
                       className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 text-gray-900"
                     >
                       <LayoutDashboard className="w-4 h-4" />
-                      Dashboard
+                      Profile
                     </button>
 
                     {/* Orders */}

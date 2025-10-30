@@ -12,12 +12,14 @@ import CheckoutPage from "./pages/Checkout";
 import OrderSummary from "./pages/orderSummary";
 import SingleProduct from "./pages/SingleProduct";
 import UserDashboard from "./pages/Dashboard";
+import ContactPage from "./pages/Contact";
 
 function App() {
   return (
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/contact" element={<ContactPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/products" element={<Products />} />

@@ -42,7 +42,7 @@ const Profile = () => {
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white shadow-md rounded-md mt-10">
-      <h2 className="text-2xl font-bold mb-4">Profile</h2>
+      <h2 className="text-3xl font-bold mb-4 text-center panchang tracking-[0.1em]">Profile</h2>
 
       {loading && <p className="text-blue-500">Loading...</p>}
       {error && <p className="text-red-500 mb-2">{error}</p>}
@@ -93,10 +93,10 @@ const Profile = () => {
       </form>
 
       {/* Delete Account */}
-      <div className="mt-6">
+      <div className="mt-6 flex justify-center">
         <button
           onClick={handleDelete}
-          className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
+          className="bg-red-600 text-white px-4 py-2    rounded hover:bg-red-700 transition"
         >
           Delete Account
         </button>

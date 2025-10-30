@@ -1,8 +1,12 @@
 import React from "react";
 import ImageCarousel from "./ImageCarousel";
-
+import { useNavigate} from "react-router-dom";
 
 export default function CulturesHomepage() {
+
+    const navigate = useNavigate() ;
+
+
   return (
     <div className="min-h-screen bg-gray-50 relative overflow-hidden">
 
@@ -41,14 +45,14 @@ export default function CulturesHomepage() {
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-8">
         <div className="text-center mb-8">
           {/* ✨ Golden gradient + shine animation */}
-          <h1 className="text-8xl md:text-9xl lg:text-[10rem] font-medium leading-none tracking-tight relative inline-block text-transparent bg-clip-text bg-gradient-to-l from-gray-800 via-violet-300 to-pink-400 animate-shine fontss" style={{filter: "brightness(3)"}}>
+          <h1 className="text-8xl md:text-9xl lg:text-[8rem] font-medium leading-none tracking-tight relative inline-block text-transparent bg-clip-text bg-gradient-to-l from-gray-800 via-orange-600  to-pink-300 animate-shine star1" style={{filter: "brightness(3)"}}>
             Culture's
             <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent opacity-0 animate-lightshine"></span>
           </h1>
         </div>
 
         {/* Shop button */}
-        <button className="bg-orange-300 hover:bg-orange-400 text-gray-900 px-6 sm:px-8 py-2 rounded-full text-xs sm:text-sm font-normal tracking-[0.15em] uppercase transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+        <button className="bg-orange-300 hover:bg-orange-400 text-gray-900 px-6 sm:px-8 py-2 rounded-full text-xs sm:text-sm font-normal tracking-[0.15em] uppercase transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105" onClick={() => navigate('/products')}>
           SHOP
         </button>
       </div>

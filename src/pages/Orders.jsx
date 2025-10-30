@@ -127,7 +127,7 @@ const Orders = () => {
                     </div>
                     <span
                       className={`px-3 py-1 rounded-full text-sm font-medium border ${
-                        order.status?.toLowerCase() === "delivered"
+                        order.status?.toLowerCase() === "confirmed"
                           ? "bg-green-100 text-green-800 border-green-200"
                           : order.status?.toLowerCase() === "pending"
                           ? "bg-yellow-100 text-yellow-800 border-yellow-200"
@@ -191,7 +191,7 @@ const Orders = () => {
               <div className="bg-gray-50 px-6 py-4 border-t border-gray-200 flex justify-between items-center">
                 <div className="flex items-center gap-2 text-sm text-gray-600">
                   <CreditCard className="w-4 h-4" />
-                  <span>Payment method: Card</span>
+                
                 </div>
                 {order.status?.toLowerCase() !== "cancelled" &&
                   order.status?.toLowerCase() !== "delivered" && (

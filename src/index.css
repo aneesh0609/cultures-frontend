@@ -7,11 +7,23 @@
 }
 .fontss{
   /* font-family: 'Dancing Script', cursive; */
-   font-family: 'Britney', cursive; 
-
- 
+   font-family: 'Britney', cursive;
 
 }
+
+
+ .star
+ {
+  font-family: 'Stardom', sans-serif;
+   
+ }
+
+
+ .star1
+ {
+font-family: 'Telma', cursive;
+ }
+
 
 .panchang{
      font-family: 'Panchang', sans-serif;
