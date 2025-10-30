@@ -13,6 +13,7 @@ import {
   Package,
   Check,
 } from "lucide-react";
+import ProductCard from "./CompactDeliveryMap";
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -70,6 +71,7 @@ const Products = () => {
         </div>
       )}
 
+
       {/* Products */}
       {!loading && !error && (
         <>
@@ -83,7 +85,7 @@ const Products = () => {
               {items.map((product, index) => (
                 <div
                   key={product._id}
-                  className="group relative bg-white/5 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 transition-all hover:scale-105"
+                  className="group relative bg-gray-200 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 transition-all hover:scale-105"
                   onMouseEnter={() => setHoveredProduct(index)}
                   onMouseLeave={() => setHoveredProduct(null)}
                 >
@@ -131,7 +133,7 @@ const Products = () => {
 
                   {/* Info */}
                   <div className="p-3 sm:p-4">
-                    <h3 className="text-white font-medium mb-1 truncate text-sm normal tracking-[0.05em]">
+                    <h3 className="text-black font-medium mb-1 truncate text-sm normal tracking-[0.05em]">
                       {product.name}
                     </h3>
                     <div className="flex items-center mb-2">
@@ -145,13 +147,13 @@ const Products = () => {
                           }`}
                         />
                       ))}
-                      <span className="text-white/60 text-xs ml-1">
+                      <span className="text-black text-xs ml-1">
                         ({product.rating?.average?.toFixed(1) || "0"})
                       </span>
                     </div>
                     <div className="flex items-center justify-between">
                       <div>
-                        <span className="text-white font-bold text-sm">
+                        <span className="text-black font-bold text-sm">
                           ₹{product.price}
                         </span>
                         {product.discountPrice > 0 && (
@@ -173,8 +175,9 @@ const Products = () => {
                             <Check className="w-3 h-3" /> Added
                           </div>
                         ) : (
-                          <ShoppingBag className="w-3 h-3" />
+                          <ShoppingBag className="w-5 h-4 " />
                         )}
+                      
                       </button>
                     </div>
                   </div>

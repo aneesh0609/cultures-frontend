@@ -1,11 +1,24 @@
-import React from 'react'
+import React from "react";
+import ImageCarousel from "./ImageCarousel";
+
 
 export default function CulturesHomepage() {
   return (
     <div className="min-h-screen bg-gray-50 relative overflow-hidden">
-      {/* Background organic shapes */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Left large organic shape */}
+
+      
+      {/* 🌄 Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url('/bg.jpg')`,
+          filter: "brightness(0.2)",
+          zIndex: 0,
+        }}
+      ></div>
+
+      {/* 🌀 Background organic shapes */}
+      <div className="absolute inset-0 pointer-events-none z-1">
         <div
           className="absolute -left-50 top-10 w-48 h-56 sm:w-64 sm:h-72 bg-orange-300 opacity-70"
           style={{
@@ -13,8 +26,7 @@ export default function CulturesHomepage() {
             transform: "rotate(-10deg)",
           }}
         ></div>
-
-        {/* Right large organic shape */}
+      
         <div
           className="absolute -right-54 top-10 w-48 h-56 sm:w-64 sm:h-72 bg-orange-300 opacity-70"
           style={{
@@ -23,35 +35,29 @@ export default function CulturesHomepage() {
           }}
         ></div>
       </div>
+     
 
-      {/* Main content */}
+      {/* 🧠 Main content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-8">
         <div className="text-center mb-8">
-          <h1
-            className="text-8xl md:text-9xl  fonts lg:text-[12rem] font-light text-gray-700 lg:mb-3 leading-none tracking-tight"
-            
-          >
-            culture's
+          {/* ✨ Golden gradient + shine animation */}
+          <h1 className="text-8xl md:text-9xl lg:text-[10rem] font-medium leading-none tracking-tight relative inline-block text-transparent bg-clip-text bg-gradient-to-l from-gray-800 via-violet-300 to-pink-400 animate-shine fontss" style={{filter: "brightness(3)"}}>
+            Culture's
+            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent opacity-0 animate-lightshine"></span>
           </h1>
-
-    
         </div>
 
         {/* Shop button */}
-        <button className="bg-gray-800 hover:bg-gray-700 text-orange-300 px-6 sm:px-8 py-2 rounded-full text-xs sm:text-sm font-normal tracking-[0.15em] uppercase transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 normal">
+        <button className="bg-orange-300 hover:bg-orange-400 text-gray-900 px-6 sm:px-8 py-2 rounded-full text-xs sm:text-sm font-normal tracking-[0.15em] uppercase transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
           SHOP
         </button>
       </div>
 
-      {/* Bottom section */}
+      {/* 🧍‍♀️ Bottom section */}
       {/* Left group */}
       <div className="absolute bottom-0 left-0 flex gap-2 z-10 pl-2 pb-0">
-        {/* First shape with model */}
         <div className="w-40 sm:w-48 flex items-end justify-center relative">
-          {/* Orange curved shape - much bigger */}
           <div className="absolute bottom-0 w-full h-40 sm:h-46 bg-orange-300 opacity-60 rounded-t-full"></div>
-
-          {/* Model image - much taller */}
           <img
             src="/model1.png"
             alt="Model"
@@ -63,7 +69,6 @@ export default function CulturesHomepage() {
           />
         </div>
 
-        {/* Hide second shape on mobile */}
         <div className="hidden sm:flex w-48 items-end justify-center relative">
           <div className="absolute bottom-0 w-full h-46 bg-orange-400 opacity-70 rounded-t-full"></div>
           <img
@@ -93,7 +98,6 @@ export default function CulturesHomepage() {
           />
         </div>
 
-        {/* Hide second shape on mobile */}
         <div className="hidden sm:flex w-48 items-end justify-center relative">
           <div className="absolute bottom-0 w-full h-46 bg-orange-200 opacity-70 rounded-t-full"></div>
           <img

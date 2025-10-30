@@ -4,6 +4,9 @@ import CulturesHomepage from '../components/Header';
 import Navbar from '../components/Navbar';
 import Product from '../components/Product';
 import Footer from '../components/Footer';
+import CompactDeliveryMap from '../components/CompactDeliveryMap';
+import ProductCard from '../components/CompactDeliveryMap';
+import ImageCarousel from '../components/ImageCarousel';
 
 export default function Home() {
  
@@ -13,15 +16,43 @@ export default function Home() {
       
         <Navbar />      
        <CulturesHomepage />
+       <ImageCarousel />
 
-      {/* Features */}
+      
+   <div className="bg-gray-900 flex items-center justify-center py-6">
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-8 px-6">
+    <ProductCard
+      image={"./1.png"}
+      title="Coming Soon"
+      features={["100% cotton", "red", "fabric"]}
+    />
+    <ProductCard
+      image={"./2.png"}
+      title="Coming Soon"
+      features={["100% cotton", "red", "fabric"]}
+    />
+    <ProductCard
+      image={"./hero1.png"}
+      title="Coming Soon"
+      features={["100% cotton", "red", "fabric"]}
+    />
+    <ProductCard
+      image={"./hero.jpg"}
+      title="Coming Soon"
+      features={["100% cotton", "red", "fabric"]}
+    />
+  </div>
+</div>
+   
+
+   {/* Features */}
       <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 normal tracking-[0.08em]">
             {[
-              { icon: Zap, title: "Lightning Fast", desc: "Quick delivery worldwide" },
+              { icon: Zap, title: "Lightning Fast", desc: "Quick delivery " },
               { icon: Shield, title: "Secure Payment", desc: "100% protected checkout" },
-              { icon: Truck, title: "Free Shipping", desc: "On orders over $100" },
+              { icon: Truck, title: "Free Shipping", desc: "On orders over 999" },
               { icon: Headphones, title: "24/7 Support", desc: "Always here to help" }
             ].map((feature, index) => (
               <div key={index} className="text-center group">
@@ -35,9 +66,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+    
 
       <Product />
-
       <Footer />
     </div>
 

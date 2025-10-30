@@ -1,12 +1,12 @@
 import React from 'react'
-import Product from '../components/Product'
 import Navbar from '../components/Navbar'
+import Productss from '../components/NewProducts'
 
 const Products = () => {
   return (
     <div>
       <Navbar />
-      <Product />
+      <Productss />
     </div>
   )
 }

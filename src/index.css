@@ -24,3 +24,33 @@
 .normal{
   font-family: 'Clash Grotesk', sans-serif;
 }
+
+
+ @keyframes shine {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+} 
+
+@keyframes lightshine {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+.animate-shine {
+  background-size: 200% auto;
+  animation: shine 10s linear infinite;
+}
+
