@@ -9,7 +9,7 @@ import Cart from "./pages/Cart";
 import Orders from "./pages/Orders";
 import ProtectedRoute from "./routes/ProtectedRoutes";
 import CheckoutPage from "./pages/Checkout";
-import OrderSummary from "./pages/orderSummary";
+import OrderSummary from "./pages/OrderSummary";
 import SingleProduct from "./pages/SingleProduct";
 import UserDashboard from "./pages/Dashboard";
 import ContactPage from "./pages/Contact";

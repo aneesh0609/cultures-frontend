@@ -16,24 +16,28 @@ const ProductCard = ({
     <div
       onClick={() => setShowDetails((prev) => !prev)}
       className="product-card  mr-6 w-[100%]  sm:w-[260px] rounded-xl shadow-xl overflow-hidden relative cursor-pointer 
-                 snap-start flex flex-col items-center justify-center gap-4 bg-black transition-all duration-300 
+                 snap-start flex flex-col items-center justify-center gap-4 bg-gray-900 transition-all duration-300 
                  group hover:shadow-2xl select-none p-4 sm:p-3"
     >
       {/* Product Title */}
-      <div className="para uppercase text-center leading-none z-10 mt-1 sm:mt-2">
-        <p
-          style={{
-            WebkitTextStroke: "1px rgb(207, 205, 205)",
-            WebkitTextFillColor: "transparent",
-          }}
-          className="font-bold text-base sm:text-lg -mb-5 tracking-wider text-red-300"
-        >
-          {title}
-        </p>
-        <p className="font-bold text-lg sm:text-xl tracking-wider text-red-500">
-          {title}
-        </p>
-      </div>
+<div className="para uppercase text-center leading-none z-10 mt-1 sm:mt-2 pb-3">
+  {/* ✅ Upper outlined text (always visible) */}
+  <p
+    style={{
+      WebkitTextStroke: "1px rgb(207, 205, 205)",
+      WebkitTextFillColor: "transparent",
+    }}
+    className="font-bold text-base sm:text-lg -mb-5 tracking-wider text-red-300"
+  >
+    {title}
+  </p>
+
+  {/* ✅ Lower filled text (hidden on small screens) */}
+  <p className="hidden sm:block font-bold text-lg sm:text-xl tracking-wider text-red-500 ">
+    {title}
+  </p>
+</div>
+
 
       {/* Image + Slide Animation */}
       <div

@@ -20,7 +20,7 @@ export default function Home() {
        
 
       
-   <div className="bg-gray-900 flex items-center justify-center py-6">
+   <div className="bg-gray-50 flex items-center justify-center py-6">
   <div className="grid grid-cols-2 md:grid-cols-4 gap-8 px-6">
     <ProductCard
       image={"./1.png"}
