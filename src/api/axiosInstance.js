@@ -2,7 +2,7 @@ import axios from "axios";
 import {store} from "../store/store.js"; // import your Redux store
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:8000/api", 
+  baseURL: import.meta.env.VITE_API_URL, 
   withCredentials: true, 
 })
 
