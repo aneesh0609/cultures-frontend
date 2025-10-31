@@ -4,10 +4,10 @@ import CulturesHomepage from '../components/Header';
 import Navbar from '../components/Navbar';
 import Product from '../components/Product';
 import Footer from '../components/Footer';
-import CompactDeliveryMap from '../components/CompactDeliveryMap';
 import ProductCard from '../components/CompactDeliveryMap';
 import ImageCarousel from '../components/ImageCarousel';
 import FAQSection from '../components/Faq';
+import CulturalMiniCards from '../components/SmallCards';
 
 export default function Home() {
  
@@ -17,7 +17,7 @@ export default function Home() {
       
         <Navbar />      
        <CulturesHomepage />
-       <ImageCarousel />
+       
 
       
    <div className="bg-gray-900 flex items-center justify-center py-6">
@@ -68,8 +68,9 @@ export default function Home() {
         </div>
       </section>
     
-
+    
       <Product />
+     
       <FAQSection />
       <Footer />
     </div>

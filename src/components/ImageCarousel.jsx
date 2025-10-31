@@ -4,7 +4,6 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 export default function ImageCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // ✅ Images from public folder
   const images = ["/1.png", "/2.png", "/3.png"];
 
   useEffect(() => {
@@ -23,13 +22,14 @@ export default function ImageCarousel() {
   };
 
   return (
-    <div className=" flex justify-center items-center pt-4 bg-gray-900">
+    <div className="flex justify-center items-center bg-transparent">
       <div
         className="
-          relative 
-          w-[95%] sm:w-[90%] lg:w-[85%] xl:w-[80%]
-          h-[140px] sm:h-[180px] md:h-[220px] lg:h-[240px]
-          overflow-hidden rounded-xl 
+          relative
+          w-full sm:w-[90%] lg:w-[85%] xl:w-[80%]
+          h-[80px] sm:h-[180px] md:h-[220px] lg:h-[240px]
+          overflow-hidden rounded-2xl sm:rounded-xl
+          sm:mt-4 mt-0
         "
       >
         {/* Image Slider */}
@@ -47,7 +47,7 @@ export default function ImageCarousel() {
           ))}
         </div>
 
-        {/* Navigation Arrows — show only from sm (≥640px) */}
+        {/* Navigation Arrows — hidden on mobile */}
         <div className="hidden sm:block">
           <button
             onClick={prevImage}
@@ -68,7 +68,7 @@ export default function ImageCarousel() {
           </button>
         </div>
 
-        {/* Dots Indicator — show only from sm (≥640px) */}
+        {/* Dots Indicator — only for sm and above */}
         <div className="hidden sm:flex absolute bottom-2 left-1/2 -translate-x-1/2 gap-2">
           {images.map((_, index) => (
             <button
