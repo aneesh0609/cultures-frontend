@@ -7,14 +7,14 @@ const CulturalMiniCards = () => {
       name: "Indian Saree",
       country: "India 🇮🇳",
       image:
-        "https://images.unsplash.com/photo-1610878180933-123fc41387e8?auto=format&fit=crop&w=500&q=80",
+        "",
     },
     {
       id: 2,
       name: "Japanese Kimono",
       country: "Japan 🇯🇵",
       image:
-        "https://images.unsplash.com/photo-1609951652555-f4ec9b06663a?auto=format&fit=crop&w=500&q=80",
+        "",
     },
     {
       id: 3,

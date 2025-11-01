@@ -7,6 +7,8 @@ export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async (_, thunkAPI) => {
     try {
+      console.log("API URL →", import.meta.env.VITE_API_URL);
+
       const response = await axios.get("/product/getAll-products");
       // backend returns { success: true, product: [...] }
       return response.data.product; 

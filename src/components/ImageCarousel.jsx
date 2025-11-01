@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 export default function ImageCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const images = ["/1.png", "/2.png", "/3.png"];
+  const images = ["/banner1.png", "/banner2.png", "/banner3.png"];
 
   useEffect(() => {
     const timer = setInterval(() => {
