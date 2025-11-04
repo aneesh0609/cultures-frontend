@@ -7,14 +7,14 @@ const CulturalMiniCards = () => {
       name: "Indian Saree",
       country: "India 🇮🇳",
       image:
-        "",
+        "https://wallpapers.com/images/featured/saree-pictures-2d8qt1hau3xlfjdp.jpg",
     },
     {
       id: 2,
       name: "Japanese Kimono",
       country: "Japan 🇯🇵",
       image:
-        "",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFB-RBHIclrDD4ESOYYz4LlctWVsDERdQ5hQ&s",
     },
     {
       id: 3,
@@ -28,14 +28,14 @@ const CulturalMiniCards = () => {
       name: "African Dashiki",
       country: "Africa 🌍",
       image:
-        "https://images.unsplash.com/photo-1606813902778-9cb0fbd1c4ef?auto=format&fit=crop&w=500&q=80",
+        "https://t3.ftcdn.net/jpg/16/85/53/56/360_F_1685535695_1o3fKYwZxrP2hKeV0PW3eyZRtHceGzGL.jpg",
     },
     {
       id: 5,
       name: "Arabic Thobe",
       country: "Arabia 🇴🇲",
       image:
-        "https://images.unsplash.com/photo-1601582589906-3fdbfb7c2653?auto=format&fit=crop&w=500&q=80",
+        "https://t3.ftcdn.net/jpg/05/35/98/18/360_F_535981807_IVqCzKaaDWEAW6jb8822qspaiw0z25jB.jpg",
     },
   ];
 
